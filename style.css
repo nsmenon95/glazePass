@@ -1,0 +1,898 @@
+/* ===========================================================
+   VAULTGEN PRO
+   STYLE.CSS (PART 1)
+=========================================================== */
+
+:root {
+    --bg: #090b12;
+
+    --card: rgba(20, 22, 30, 0.72);
+
+    --glass: rgba(255, 255, 255, 0.08);
+
+    --glass-hover: rgba(255, 255, 255, 0.12);
+
+    --primary: #8b5cf6;
+
+    --secondary: #d946ef;
+
+    --success: #22c55e;
+
+    --warning: #f59e0b;
+
+    --danger: #ef4444;
+
+    --text: #f8fafc;
+
+    --muted: #94a3b8;
+
+    --shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+}
+
+/* ---------- RESET ---------- */
+
+* {
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+html {
+    width: 380px;
+    height: 540px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    font-family:
+        Inter,
+        Segoe UI,
+        Arial,
+        sans-serif;
+
+    background: var(--bg);
+
+    color: var(--text);
+
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ---------- BACKGROUND ---------- */
+
+body::before {
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        radial-gradient(circle at top left,
+
+            rgba(139, 92, 246, 0.15),
+            transparent 45%),
+        radial-gradient(circle at bottom right,
+
+            rgba(217, 70, 239, 0.1),
+            transparent 45%);
+}
+
+.blob {
+    position: fixed;
+
+    width: 280px;
+
+    height: 280px;
+
+    border-radius: 50%;
+
+    filter: blur(90px);
+
+    opacity: 0.18;
+
+    z-index: 0;
+
+    animation: floatBlob 10s ease-in-out infinite alternate;
+}
+
+.blob1 {
+    top: -120px;
+
+    left: -120px;
+
+    background: var(--primary);
+}
+
+.blob2 {
+    right: -120px;
+
+    bottom: -120px;
+
+    background: var(--secondary);
+}
+
+@keyframes floatBlob {
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(45px, 35px);
+    }
+}
+
+/* ---------- MAIN ---------- */
+
+.popup {
+    position: relative;
+
+    padding: 12px;
+
+    z-index: 2;
+
+    width: 100%;
+
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+.card {
+    background: var(--card);
+
+    backdrop-filter: blur(24px);
+
+    -webkit-backdrop-filter: blur(24px);
+
+    border: 1px solid var(--glass);
+
+    border-radius: 24px;
+
+    box-shadow: var(--shadow);
+
+    padding: 20px;
+}
+
+/* ---------- HEADER ---------- */
+
+header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 16px;
+}
+
+header h1 {
+    font-size: 1.5rem;
+
+    font-weight: 700;
+
+    letter-spacing: -0.5px;
+
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+    margin-top: 4px;
+
+    font-size: 0.75rem;
+
+    color: var(--muted);
+}
+
+.status-dot {
+    width: 12px;
+
+    height: 12px;
+
+    border-radius: 50%;
+
+    background: var(--success);
+
+    box-shadow: 0 0 10px var(--success);
+}
+
+/* ---------- PASSWORD BOX ---------- */
+
+.password-container {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    background: rgba(0, 0, 0, 0.25);
+
+    border: 1px solid var(--glass);
+
+    border-radius: 16px;
+
+    padding: 6px 6px 6px 18px;
+
+    margin-bottom: 16px;
+
+    transition: 0.25s;
+}
+
+.password-container:hover {
+    border-color: rgba(139, 92, 246, 0.3);
+}
+
+.password-container:focus-within {
+    border-color: var(--primary);
+}
+
+#password {
+    flex: 1;
+
+    background: transparent;
+
+    border: none;
+
+    color: var(--text);
+
+    padding: 12px 0;
+
+    font-size: 1.1rem;
+
+    font-family: Consolas, monospace;
+
+    outline: none;
+
+    transition: 0.25s;
+
+    min-width: 0;
+}
+
+.icon-btn {
+    width: 42px;
+
+    height: 42px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    background: rgba(255, 255, 255, 0.05);
+
+    color: white;
+
+    transition: 0.25s;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    margin-left: 12px;
+}
+
+.icon-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+
+    transform: scale(1.05);
+}
+
+.icon-btn:active {
+    transform: scale(0.95);
+}
+
+/* ---------- STRENGTH ---------- */
+
+.strength-section {
+    margin-bottom: 16px;
+}
+
+.strength-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    font-size: 0.82rem;
+
+    color: var(--muted);
+
+    margin-bottom: 8px;
+}
+
+.strength-track {
+    height: 8px;
+
+    background: rgba(255, 255, 255, 0.05);
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+.strength-fill {
+    width: 0;
+
+    height: 100%;
+
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+
+    transition: 0.4s;
+}
+
+/* ---------- LENGTH ---------- */
+
+.length-section {
+    margin-bottom: 16px;
+}
+
+.length-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 12px;
+
+    font-size: 0.9rem;
+}
+
+#lengthValue {
+    font-weight: 700;
+
+    color: var(--primary);
+}
+
+/* ===========================================================
+   VAULTGEN PRO
+   STYLE.CSS (PART 2)
+=========================================================== */
+
+/* ---------- SLIDER ---------- */
+
+#lengthSlider {
+    width: 100%;
+
+    height: 6px;
+
+    appearance: none;
+
+    -webkit-appearance: none;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    border-radius: 50px;
+
+    outline: none;
+
+    cursor: pointer;
+}
+
+#lengthSlider::-webkit-slider-thumb {
+    appearance: none;
+
+    -webkit-appearance: none;
+
+    width: 20px;
+
+    height: 20px;
+
+    border-radius: 50%;
+
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.45);
+
+    transition: 0.25s;
+}
+
+#lengthSlider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+#lengthSlider::-moz-range-thumb {
+    width: 20px;
+
+    height: 20px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: var(--primary);
+}
+
+/* ---------- OPTIONS ---------- */
+
+.options {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+
+    margin-bottom: 16px;
+}
+
+.toggle {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 10px 12px;
+
+    background: rgba(255, 255, 255, 0.03);
+
+    border: 1px solid var(--glass);
+
+    border-radius: 14px;
+
+    cursor: pointer;
+
+    transition: 0.25s;
+
+    user-select: none;
+}
+
+.toggle:hover {
+    background: rgba(255, 255, 255, 0.07);
+
+    transform: translateY(-2px);
+
+    border-color: rgba(139, 92, 246, 0.35);
+}
+
+.toggle input {
+    width: 18px;
+
+    height: 18px;
+
+    accent-color: var(--primary);
+
+    cursor: pointer;
+}
+
+.toggle span {
+    font-size: 0.88rem;
+
+    color: var(--text);
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+/* ---------- GENERATE BUTTON ---------- */
+
+.buttons {
+    margin-top: 6px;
+}
+
+.generate-btn {
+    width: 100%;
+
+    border: none;
+
+    border-radius: 16px;
+
+    padding: 16px;
+
+    cursor: pointer;
+
+    font-size: 1rem;
+
+    font-weight: 700;
+
+    color: white;
+
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+
+    transition: 0.25s;
+
+    box-shadow: 0 12px 30px rgba(139, 92, 246, 0.3);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+}
+
+.generate-btn:hover {
+    transform: translateY(-2px);
+
+    filter: brightness(1.05);
+
+    box-shadow: 0 18px 40px rgba(139, 92, 246, 0.35);
+}
+
+.generate-btn:active {
+    transform: scale(0.98);
+}
+
+.generate-btn:disabled {
+    opacity: 0.5;
+
+    cursor: not-allowed;
+}
+
+/* ---------- TOAST ---------- */
+
+.toast {
+    position: fixed;
+
+    left: 50%;
+
+    bottom: 22px;
+
+    transform: translateX(-50%) translateY(30px);
+
+    background: rgba(20, 20, 30, 0.92);
+
+    border: 1px solid var(--glass);
+
+    color: white;
+
+    padding: 10px 18px;
+
+    border-radius: 12px;
+
+    font-size: 0.85rem;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition: 0.35s;
+
+    backdrop-filter: blur(16px);
+
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    white-space: nowrap;
+}
+
+.toast.show {
+    opacity: 1;
+
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ---------- FOCUS ---------- */
+
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--primary);
+
+    outline-offset: 2px;
+}
+
+/* ---------- SELECTION ---------- */
+
+::selection {
+    background: rgba(139, 92, 246, 0.35);
+}
+
+/* ---------- SCROLLBAR ---------- */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.18);
+
+    border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.28);
+}
+
+/* ===========================================================
+   VAULTGEN PRO
+   STYLE.CSS (PART 3)
+===========================================================*/
+
+/* --------------------------
+   CARD ANIMATIONS
+--------------------------- */
+
+.card {
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+
+    border-color: rgba(139, 92, 246, 0.18);
+
+    box-shadow:
+        0 30px 70px rgba(0, 0, 0, 0.45),
+        0 0 35px rgba(139, 92, 246, 0.1);
+}
+
+/* --------------------------
+   INPUT PLACEHOLDER
+--------------------------- */
+
+#password::placeholder {
+    color: var(--muted);
+}
+
+/* --------------------------
+   PASSWORD GENERATED
+--------------------------- */
+
+.generated {
+    
+    animation: fadePassword 0.35s ease;
+}
+
+@keyframes fadePassword {
+    from {
+        opacity: 0.35;
+
+        transform: translateY(4px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+}
+
+/* --------------------------
+   STATUS DOT
+--------------------------- */
+
+.status-dot {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.55);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+    }
+}
+
+/* --------------------------
+   BUTTON RIPPLE EFFECT
+--------------------------- */
+
+.generate-btn {
+    overflow: hidden;
+
+    position: relative;
+}
+
+.generate-btn::before {
+    content: "";
+
+    position: absolute;
+
+    width: 0;
+
+    height: 0;
+
+    left: 50%;
+
+    top: 50%;
+
+    background: rgba(255, 255, 255, 0.18);
+
+    border-radius: 50%;
+
+    transform: translate(-50%, -50%);
+
+    transition: 0.5s;
+}
+
+.generate-btn:active::before {
+    width: 420px;
+
+    height: 420px;
+}
+
+/* --------------------------
+   COPY BUTTON
+--------------------------- */
+
+.icon-btn.success {
+    background: rgba(34, 197, 94, 0.18);
+
+    color: #22c55e;
+}
+
+/* --------------------------
+   PASSWORD BOX HOVER
+--------------------------- */
+
+/* Container handles hover border color */
+
+/* --------------------------
+   OPTIONS
+--------------------------- */
+
+.toggle input {
+    flex-shrink: 0;
+}
+
+.toggle:hover span {
+    color: white;
+}
+
+/* --------------------------
+   SLIDER LABEL
+--------------------------- */
+
+#lengthValue {
+    min-width: 28px;
+
+    text-align: right;
+}
+
+/* --------------------------
+   SMALL POPUP SUPPORT
+--------------------------- */
+
+@media (max-width: 340px) {
+    body {
+        min-width: 280px;
+    }
+
+    .card {
+        padding: 14px;
+    }
+
+    .options {
+        grid-template-columns: 1fr;
+    }
+
+    .full-width {
+        grid-column: auto;
+    }
+}
+
+/* --------------------------
+   LARGE MONITOR SUPPORT
+--------------------------- */
+
+@media (min-width: 600px) {
+    html {
+        width: 100%;
+        height: 100vh;
+        overflow: auto;
+    }
+
+    body {
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        min-height: 100vh;
+
+        overflow: auto;
+    }
+}
+
+/* --------------------------
+   DISABLE TEXT SELECTION
+--------------------------- */
+
+button,
+label,
+.status-dot,
+.generate-btn {
+    user-select: none;
+}
+
+/* --------------------------
+   SMOOTH TRANSITIONS
+--------------------------- */
+
+button,
+input,
+label,
+.strength-fill,
+.card,
+.toggle {
+    transition:
+        background-color 0.25s,
+        color 0.25s,
+        border-color 0.25s,
+        transform 0.25s,
+        opacity 0.25s,
+        box-shadow 0.25s;
+}
+
+/* --------------------------
+   ACCESSIBILITY
+--------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+
+        transition: none !important;
+    }
+}
+
+.strength-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.strength-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+}
+
+.strength-dot{
+
+    width:10px;
+
+    height:10px;
+
+    border-radius:50%;
+
+    background:#22c55e;
+
+    box-shadow:
+        0 0 10px
+        rgba(34,197,94,.6);
+
+}

@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LockForge</title>
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <!-- Background -->
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+
+    <main class="popup">
+        <div class="card">
+            <!-- Header -->
+            <header>
+                <div>
+                    <h1>LockForge</h1>
+                    <p class="subtitle">Secure • Local Only</p>
+                </div>
+
+                <div class="status-dot"></div>
+            </header>
+
+            <!-- Password Display -->
+
+            <section class="password-container">
+                <input id="password" type="text" readonly placeholder="Generate a password" />
+
+
+                <button id="copyBtn" class="icon-btn" title="Copy Password">
+
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+
+                        <rect x="9" y="9" width="13" height="13" rx="2">
+                        </rect>
+
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1">
+                        </path>
+
+                    </svg>
+
+                </button>
+            </section>
+
+            <!-- Strength -->
+
+            <section class="strength-section">
+                <div class="strength-header">
+                    <div class="strength-left">
+                        <div id="strengthDot" class="strength-dot"></div>
+                        <span id="strengthLabel"> Excellent </span>
+                    </div>
+
+                    <span id="entropyLabel"> 128 bits </span>
+                </div>
+
+                <div class="strength-track">
+                    <div id="strengthFill" class="strength-fill"></div>
+                </div>
+            </section>
+
+            <!-- Length -->
+
+            <section class="length-section">
+                <div class="length-header">
+                    <span>Password Length</span>
+
+                    <span id="lengthValue"> 16 </span>
+                </div>
+
+                <input id="lengthSlider" type="range" min="8" max="32" value="16" />
+            </section>
+
+            <!-- Options -->
+
+            <section class="options">
+                <label class="toggle">
+                    <input type="checkbox" id="uppercase" checked />
+
+                    <span>Uppercase</span>
+                </label>
+
+                <label class="toggle">
+                    <input type="checkbox" id="lowercase" checked />
+
+                    <span>Lowercase</span>
+                </label>
+
+                <label class="toggle">
+                    <input type="checkbox" id="numbers" checked />
+
+                    <span>Numbers</span>
+                </label>
+
+                <label class="toggle">
+                    <input type="checkbox" id="symbols" checked />
+
+                    <span>Symbols</span>
+                </label>
+
+                <label class="toggle full-width">
+                    <input type="checkbox" id="exclude" />
+
+                    <span> Exclude O 0 I l 1 </span>
+                </label>
+            </section>
+
+            <!-- Buttons -->
+
+            <section class="buttons">
+                <button id="generateBtn" class="generate-btn">
+                    🔐 Generate & Copy
+                </button>
+            </section>
+
+            <!-- Toast -->
+
+            <div id="toast" class="toast">Copied!</div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
