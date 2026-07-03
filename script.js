@@ -253,10 +253,10 @@ function calculateEntropy(passwordLength, poolSize) {
 function updateStrengthMeter() {
     const pools = buildCharacterPools();
 
-    if (pools.length === 0) {
+    if (pools.length === 0 || !currentGeneratedPassword) {
         strengthFill.style.width = "0%";
 
-        strengthLabel.textContent = "No Selection";
+        strengthLabel.textContent = !currentGeneratedPassword ? "Ready" : "No Selection";
 
         entropyLabel.textContent = "0 bits";
 
@@ -526,9 +526,6 @@ function initialize() {
 
     // Update strength meter
     updateStrengthMeter();
-
-    // Generate first password
-    generate();
 }
 
 // Start VaultGen
