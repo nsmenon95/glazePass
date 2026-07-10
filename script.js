@@ -16,6 +16,8 @@
 const passwordField = document.getElementById("password");
 
 let currentGeneratedPassword = "";
+let isGenerating = false;
+let clipboardClearTimeout = null;
 
 const copyButton = document.getElementById("copyBtn");
 
@@ -121,20 +123,29 @@ function buildCharacterPools() {
    probability.
 =========================================================== */
 
+const randomBuffer = new Uint8Array(256);
+let randomBufferIndex = randomBuffer.length;
+
+function getSecureRandomByte() {
+    if (randomBufferIndex >= randomBuffer.length) {
+        crypto.getRandomValues(randomBuffer);
+        randomBufferIndex = 0;
+    }
+    return randomBuffer[randomBufferIndex++];
+}
+
 function secureRandom(max) {
     if (max <= 0) {
         throw new Error("Invalid max value.");
     }
 
-    const limit = Math.floor(256 / max) * max;
+    const limit = 256 - (256 % max);
 
     while (true) {
-        const bytes = new Uint8Array(1);
+        const byte = getSecureRandomByte();
 
-        crypto.getRandomValues(bytes);
-
-        if (bytes[0] < limit) {
-            return bytes[0] % max;
+        if (byte < limit) {
+            return byte % max;
         }
     }
 }
@@ -343,6 +354,23 @@ const SUCCESS_SVG = `
 </svg>
 `;
 
+function startClipboardClearTimer(passwordToClear) {
+    if (clipboardClearTimeout) {
+        clearTimeout(clipboardClearTimeout);
+    }
+    clipboardClearTimeout = setTimeout(async () => {
+        try {
+            const currentText = await navigator.clipboard.readText();
+            if (currentText === passwordToClear) {
+                await navigator.clipboard.writeText("");
+                showToast("Clipboard cleared for security");
+            }
+        } catch (error) {
+            // Ignore access errors or permission denials
+        }
+    }, 30000);
+}
+
 async function copyPassword() {
     const password = currentGeneratedPassword;
 
@@ -358,6 +386,8 @@ async function copyPassword() {
         copyButton.innerHTML = SUCCESS_SVG;
 
         showToast("Password copied");
+
+        startClipboardClearTimer(password);
 
         setTimeout(() => {
             copyButton.classList.remove("success");
@@ -395,6 +425,7 @@ async function copyGeneratedPassword() {
 
     if (!password) {
         generateButton.disabled = false;
+        isGenerating = false;
         return;
     }
 
@@ -407,20 +438,28 @@ async function copyGeneratedPassword() {
         copyButton.classList.add("success");
         copyButton.innerHTML = SUCCESS_SVG;
 
+        startClipboardClearTimer(password);
+
         setTimeout(() => {
             generateButton.innerHTML = GENERATE_BTN_HTML;
             generateButton.disabled = false;
             copyButton.classList.remove("success");
             copyButton.innerHTML = COPY_SVG;
+            isGenerating = false;
         }, 1500);
     } catch (error) {
         console.error(error);
         showToast("Copy failed");
         generateButton.disabled = false;
+        isGenerating = false;
     }
 }
 
 function generateAndCopy() {
+    if (isGenerating) {
+        return;
+    }
+
     const pools = buildCharacterPools();
 
     if (pools.length === 0) {
@@ -428,6 +467,7 @@ function generateAndCopy() {
         return;
     }
 
+    isGenerating = true;
     generateButton.disabled = true;
 
     const combinedPool = pools.join("");
