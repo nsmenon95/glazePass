@@ -230,7 +230,6 @@ function generatePassword() {
 
     currentGeneratedPassword = finalPassword;
     passwordField.value = formatPasswordForDisplay(finalPassword);
-    passwordField.select();
 
     passwordField.classList.remove("generated");
 
@@ -264,10 +263,10 @@ function calculateEntropy(passwordLength, poolSize) {
 function updateStrengthMeter() {
     const pools = buildCharacterPools();
 
-    if (pools.length === 0 || !currentGeneratedPassword) {
+    if (pools.length === 0) {
         strengthFill.style.width = "0%";
 
-        strengthLabel.textContent = !currentGeneratedPassword ? "Ready" : "No Selection";
+        strengthLabel.textContent = "No Selection";
 
         entropyLabel.textContent = "0 bits";
 
@@ -287,7 +286,7 @@ function updateStrengthMeter() {
 
     entropyLabel.textContent = `${Math.round(entropy)} bits`;
 
-    let percentage = Math.min((entropy / 128) * 100, 100);
+    let percentage = Math.min((entropy / 200) * 100, 100);
 
     strengthFill.style.width = `${percentage}%`;
 
@@ -520,9 +519,8 @@ passwordField.addEventListener(
 =========================================================== */
 
 slider.addEventListener("input", () => {
-
-    generate();
-
+    lengthValue.textContent = slider.value;
+    updateStrengthMeter();
 });
 
 [
