@@ -28,19 +28,19 @@
 
 ---
 
-## 📦 How to Install (Chrome Extension)
+## 📦 How to Install (Firefox Extension)
 
-1. Open Google Chrome and type `chrome://extensions/` in the address bar.
-2. In the top-right corner, toggle the **Developer mode** switch to **ON**.
-3. In the top-left corner, click the **Load unpacked** button.
-4. Select the root **glazePass** directory (containing `manifest.json`, `index.html`, etc.).
+1. Open Firefox and type `about:debugging` in the address bar.
+2. In the left sidebar, click on **This Firefox**.
+3. Under the **Temporary Extensions** section, click the **Load Temporary Add-on...** button.
+4. Select the `manifest.json` file inside the root **glazePass** directory.
 5. Pin **glazePass** to your browser toolbar for quick one-click access!
 
 ---
 
 ## 📐 Extension Viewport Constraints
 
-- **Chrome Popup Viewport:** Handled by a custom `html` media query constraint of `380px` width by `540px` height with hidden scrollbars for compact visual styling.
+- **Firefox Popup Viewport:** Handled by a custom `html` media query constraint of `380px` width by `540px` height with hidden scrollbars for compact visual styling.
 - **Tab/Desktop Viewport:** Rescaled automatically to `100%` viewport width and height, centering the glass container card on larger monitor formats.
 
 ---
