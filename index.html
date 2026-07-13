@@ -4,16 +4,42 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<<<<<<< HEAD
     <title>glazePass</title>
+=======
+    <meta name="color-scheme" content="dark" />
+    <title>LockForge</title>
+    
+    <!-- Inline critical styles: parsed before external CSS loads -->
+    <style>
+        html {
+            width: 380px;
+            height: 540px;
+            background: #090b12;
+            color-scheme: dark;
+            overflow: hidden;
+        }
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background: #090b12;
+            overflow: hidden;
+        }
+    </style>
+>>>>>>> 0c2f2fe21173b64a53b372607b2c06c4d250b08d
 
     <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-    <!-- Background -->
-    <div class="blob blob1"></div>
-    <div class="blob blob2"></div>
+    <div id="app">
+        <!-- Background -->
+        <div class="blob blob1"></div>
+        <div class="blob blob2"></div>
 
+<<<<<<< HEAD
     <main class="popup">
         <div class="card">
             <!-- Header -->
@@ -55,75 +81,119 @@
                     <div class="strength-left">
                         <div id="strengthDot" class="strength-dot"></div>
                         <span id="strengthLabel"> Excellent </span>
+=======
+        <main class="popup">
+            <div class="card">
+                <!-- Header -->
+                <header>
+                    <div>
+                        <h1>LockForge</h1>
+                        <p class="subtitle">Secure • Local Only</p>
+>>>>>>> 0c2f2fe21173b64a53b372607b2c06c4d250b08d
                     </div>
 
-                    <span id="entropyLabel"> 128 bits </span>
-                </div>
+                    <div class="status-dot"></div>
+                </header>
 
-                <div class="strength-track">
-                    <div id="strengthFill" class="strength-fill"></div>
-                </div>
-            </section>
+                <!-- Password Display -->
 
-            <!-- Length -->
+                <section class="password-container">
+                    <input id="password" type="text" readonly placeholder="Generate a password" />
 
-            <section class="length-section">
-                <div class="length-header">
-                    <span>Password Length</span>
 
-                    <span id="lengthValue"> 16 </span>
-                </div>
+                    <button id="copyBtn" class="icon-btn" title="Copy Password">
 
-                <input id="lengthSlider" type="range" min="8" max="32" value="16" />
-            </section>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
 
-            <!-- Options -->
+                            <rect x="9" y="9" width="13" height="13" rx="2">
+                            </rect>
 
-            <section class="options">
-                <label class="toggle">
-                    <input type="checkbox" id="uppercase" checked />
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1">
+                            </path>
 
-                    <span>Uppercase</span>
-                </label>
+                        </svg>
 
-                <label class="toggle">
-                    <input type="checkbox" id="lowercase" checked />
+                    </button>
+                </section>
 
-                    <span>Lowercase</span>
-                </label>
+                <!-- Strength -->
 
-                <label class="toggle">
-                    <input type="checkbox" id="numbers" checked />
+                <section class="strength-section">
+                    <div class="strength-header">
+                        <div class="strength-left">
+                            <div id="strengthDot" class="strength-dot"></div>
+                            <span id="strengthLabel"> Excellent </span>
+                        </div>
 
-                    <span>Numbers</span>
-                </label>
+                        <span id="entropyLabel"> 128 bits </span>
+                    </div>
 
-                <label class="toggle">
-                    <input type="checkbox" id="symbols" checked />
+                    <div class="strength-track">
+                        <div id="strengthFill" class="strength-fill"></div>
+                    </div>
+                </section>
 
-                    <span>Symbols</span>
-                </label>
+                <!-- Length -->
 
-                <label class="toggle full-width">
-                    <input type="checkbox" id="exclude" />
+                <section class="length-section">
+                    <div class="length-header">
+                        <span>Password Length</span>
 
-                    <span> Exclude O 0 I l 1 </span>
-                </label>
-            </section>
+                        <span id="lengthValue"> 16 </span>
+                    </div>
 
-            <!-- Buttons -->
+                    <input id="lengthSlider" type="range" min="8" max="32" value="16" />
+                </section>
 
-            <section class="buttons">
-                <button id="generateBtn" class="generate-btn">
-                    🔐 Generate & Copy
-                </button>
-            </section>
+                <!-- Options -->
 
-            <!-- Toast -->
+                <section class="options">
+                    <label class="toggle">
+                        <input type="checkbox" id="uppercase" checked />
 
-            <div id="toast" class="toast">Copied!</div>
-        </div>
-    </main>
+                        <span>Uppercase</span>
+                    </label>
+
+                    <label class="toggle">
+                        <input type="checkbox" id="lowercase" checked />
+
+                        <span>Lowercase</span>
+                    </label>
+
+                    <label class="toggle">
+                        <input type="checkbox" id="numbers" checked />
+
+                        <span>Numbers</span>
+                    </label>
+
+                    <label class="toggle">
+                        <input type="checkbox" id="symbols" checked />
+
+                        <span>Symbols</span>
+                    </label>
+
+                    <label class="toggle full-width">
+                        <input type="checkbox" id="exclude" />
+
+                        <span> Exclude O 0 I l 1 </span>
+                    </label>
+                </section>
+
+                <!-- Buttons -->
+
+                <section class="buttons">
+                    <button id="generateBtn" class="generate-btn">
+                        🔐 Generate & Copy
+                    </button>
+                </section>
+
+                <!-- Toast -->
+
+                <div id="toast" class="toast">Copied!</div>
+            </div>
+        </main>
+    </div>
 
     <script src="script.js"></script>
 </body>

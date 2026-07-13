@@ -1,9 +1,6 @@
-/* ===========================================================
-   VAULTGEN PRO
-   STYLE.CSS (PART 1)
-=========================================================== */
-
 :root {
+    color-scheme: dark;
+
     --bg: #090b12;
 
     --card: rgba(20, 22, 30, 0.72);
@@ -42,6 +39,14 @@
 html {
     width: 380px;
     height: 540px;
+    min-width: 380px;
+    min-height: 540px;
+    max-width: 380px;
+    max-height: 540px;
+    background: var(--bg);
+    color-scheme: dark;
+    margin: 0;
+    padding: 0;
     overflow: hidden;
     box-sizing: border-box;
 }
@@ -49,19 +54,25 @@ html {
 body {
     width: 100%;
     height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    box-sizing: border-box;
     font-family:
         Inter,
         Segoe UI,
         Arial,
         sans-serif;
-
     background: var(--bg);
-
     color: var(--text);
+}
 
+
+#app {
+    width: 100%;
+    height: 100%;
+    position: relative;
     overflow: hidden;
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
@@ -133,19 +144,13 @@ body::before {
 
 .popup {
     position: relative;
-
     padding: 12px;
-
     z-index: 2;
-
     width: 100%;
-
     height: 100%;
-
+    box-sizing: border-box;
     display: flex;
-
     flex-direction: column;
-
     justify-content: center;
 }
 
@@ -362,22 +367,14 @@ header h1 {
     color: var(--primary);
 }
 
-/* ===========================================================
-   VAULTGEN PRO
-   STYLE.CSS (PART 2)
-=========================================================== */
-
 /* ---------- SLIDER ---------- */
 
 #lengthSlider {
     width: 100%;
-
     height: 6px;
-
     appearance: none;
-
     -webkit-appearance: none;
-
+    -moz-appearance: none;
     background: rgba(255, 255, 255, 0.08);
 
     border-radius: 50px;
@@ -409,16 +406,26 @@ header h1 {
     transform: scale(1.2);
 }
 
+#lengthSlider::-moz-range-track {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50px;
+}
+
 #lengthSlider::-moz-range-thumb {
     width: 20px;
-
     height: 20px;
-
     border: none;
-
     border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.45);
+    transition: 0.25s;
+    -moz-appearance: none;
+}
 
-    background: var(--primary);
+#lengthSlider::-moz-range-thumb:hover {
+    transform: scale(1.2);
 }
 
 /* ---------- OPTIONS ---------- */
@@ -596,10 +603,12 @@ input:focus-visible {
     outline-offset: 2px;
 }
 
-/* ---------- SELECTION ---------- */
-
 ::selection {
     background: rgba(139, 92, 246, 0.35);
+}
+
+button::-moz-focus-inner {
+    border: 0;
 }
 
 /* ---------- SCROLLBAR ---------- */
@@ -618,10 +627,6 @@ input:focus-visible {
     background: rgba(255, 255, 255, 0.28);
 }
 
-/* ===========================================================
-   VAULTGEN PRO
-   STYLE.CSS (PART 3)
-===========================================================*/
 
 /* --------------------------
    CARD ANIMATIONS
