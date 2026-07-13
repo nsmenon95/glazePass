@@ -1,18 +1,3 @@
-/* ===========================================================
-   VAULTGEN PRO
-   SCRIPT.JS (PART 1)
-
-   - DOM References
-   - Character Sets
-   - Secure Random Generator
-   - Rejection Sampling
-   - Password Generation
-=========================================================== */
-
-/* ===========================================================
-   DOM REFERENCES
-=========================================================== */
-
 const passwordField = document.getElementById("password");
 
 let currentGeneratedPassword = "";
@@ -20,65 +5,32 @@ let isGenerating = false;
 let clipboardClearTimeout = null;
 
 const copyButton = document.getElementById("copyBtn");
-
 const generateButton = document.getElementById("generateBtn");
-
 const slider = document.getElementById("lengthSlider");
-
 const lengthValue = document.getElementById("lengthValue");
-
 const strengthFill = document.getElementById("strengthFill");
-
 const strengthLabel = document.getElementById("strengthLabel");
-
 const strengthDot = document.getElementById("strengthDot");
-
 const entropyLabel = document.getElementById("entropyLabel");
-
 const toast = document.getElementById("toast");
-
 const uppercaseCheckbox = document.getElementById("uppercase");
-
 const lowercaseCheckbox = document.getElementById("lowercase");
-
 const numbersCheckbox = document.getElementById("numbers");
-
 const symbolsCheckbox = document.getElementById("symbols");
-
 const excludeCheckbox = document.getElementById("exclude");
-
-/* ===========================================================
-   CHARACTER SETS
-=========================================================== */
 
 const CHARACTER_SETS = {
     uppercase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-
     lowercase: "abcdefghijklmnopqrstuvwxyz",
-
     numbers: "0123456789",
-
     symbols: "!@#$%^&*()_+-={}[]<>?/|~",
 };
 
-/*
-Characters that are easy to confuse
-O 0
-I l 1
-*/
 const AMBIGUOUS_CHARACTERS = "O0Il1";
-
-/* ===========================================================
-   SLIDER
-=========================================================== */
 
 slider.addEventListener("input", () => {
     lengthValue.textContent = slider.value;
 });
-
-/* ===========================================================
-   BUILD CHARACTER POOL
-=========================================================== */
 
 function buildCharacterPools() {
     const pools = [];
@@ -112,17 +64,6 @@ function buildCharacterPools() {
     return pools;
 }
 
-/* ===========================================================
-   CRYPTO RANDOM NUMBER
-
-   Rejection Sampling
-
-   Using '%' directly introduces modulo bias.
-
-   This method guarantees every value has exactly the same
-   probability.
-=========================================================== */
-
 const randomBuffer = new Uint8Array(256);
 let randomBufferIndex = randomBuffer.length;
 
@@ -149,13 +90,6 @@ function secureRandom(max) {
         }
     }
 }
-
-/* ===========================================================
-   FISHER-YATES SHUFFLE
-
-   Uses crypto randomness.
-
-=========================================================== */
 
 function shuffle(array) {
     for (let current = array.length - 1; current > 0; current--) {
@@ -184,35 +118,20 @@ passwordField.addEventListener("copy", (event) => {
     }
 });
 
-/* ===========================================================
-   PASSWORD GENERATOR
-=========================================================== */
-
 function generatePassword() {
     const pools = buildCharacterPools();
 
     if (pools.length === 0) {
         showToast("Select at least one character type");
-
         return;
     }
 
     const passwordLength = Number(slider.value);
-
     const password = [];
-
-    /*
-       Guarantee one character from
-       every enabled category.
-    */
 
     for (const pool of pools) {
         password.push(pool[secureRandom(pool.length)]);
     }
-
-    /*
-       Combined pool
-    */
 
     const combinedPool = pools.join("");
 
@@ -223,122 +142,72 @@ function generatePassword() {
     shuffle(password);
 
     const finalPassword = password
-
         .slice(0, passwordLength)
-
         .join("");
 
     currentGeneratedPassword = finalPassword;
     passwordField.value = formatPasswordForDisplay(finalPassword);
-
     passwordField.classList.remove("generated");
-
     void passwordField.offsetWidth;
-
     passwordField.classList.add("generated");
 }
-/* ===========================================================
-   VAULTGEN PRO
-   SCRIPT.JS (PART 2)
-
-   - Entropy
-   - Strength Meter
-   - Copy
-   - Toast
-   - Events
-=========================================================== */
-
-/* ===========================================================
-   ENTROPY CALCULATION
-=========================================================== */
 
 function calculateEntropy(passwordLength, poolSize) {
     return passwordLength * Math.log2(poolSize);
 }
-
-/* ===========================================================
-   STRENGTH METER
-=========================================================== */
 
 function updateStrengthMeter() {
     const pools = buildCharacterPools();
 
     if (pools.length === 0) {
         strengthFill.style.width = "0%";
-
         strengthLabel.textContent = "No Selection";
-
         entropyLabel.textContent = "0 bits";
-
         strengthDot.style.background = "transparent";
         strengthDot.style.boxShadow = "none";
-
         return;
     }
 
     const combinedPool = pools.join("");
-
     const entropy = calculateEntropy(
         Number(slider.value),
-
         combinedPool.length,
     );
 
     entropyLabel.textContent = `${Math.round(entropy)} bits`;
-
     let percentage = Math.min((entropy / 200) * 100, 100);
-
     strengthFill.style.width = `${percentage}%`;
 
     if (entropy < 40) {
         strengthLabel.textContent = "Weak";
-
         strengthFill.style.background = "#ef4444";
-
         strengthDot.style.background = "#ef4444";
         strengthDot.style.boxShadow = "0 0 10px rgba(239, 68, 68, 0.6)";
     } else if (entropy < 64) {
         strengthLabel.textContent = "Fair";
-
         strengthFill.style.background = "#f59e0b";
-
         strengthDot.style.background = "#f59e0b";
         strengthDot.style.boxShadow = "0 0 10px rgba(245, 158, 11, 0.6)";
     } else if (entropy < 96) {
         strengthLabel.textContent = "Strong";
-
         strengthFill.style.background = "#3b82f6";
-
         strengthDot.style.background = "#3b82f6";
         strengthDot.style.boxShadow = "0 0 10px rgba(59, 130, 246, 0.6)";
     } else {
         strengthLabel.textContent = "Excellent";
-
-        strengthFill.style.background =
-            "linear-gradient(90deg,#8b5cf6,#d946ef)";
-
+        strengthFill.style.background = "linear-gradient(90deg,#8b5cf6,#d946ef)";
         strengthDot.style.background = "#22c55e";
         strengthDot.style.boxShadow = "0 0 10px rgba(34, 197, 94, 0.6)";
     }
 }
 
-/* ===========================================================
-   COPY TOAST
-=========================================================== */
-
 function showToast(message) {
     toast.innerHTML = message;
-
     toast.classList.add("show");
-
     setTimeout(() => {
         toast.classList.remove("show");
     }, 1800);
 }
-
-/* ===========================================================
-   COPY PASSWORD
-=========================================================== */
 
 const COPY_SVG = `
 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -365,7 +234,6 @@ function startClipboardClearTimer(passwordToClear) {
                 showToast("Clipboard cleared for security");
             }
         } catch (error) {
-            // Ignore access errors or permission denials
         }
     }, 30000);
 }
@@ -379,34 +247,22 @@ async function copyPassword() {
 
     try {
         await navigator.clipboard.writeText(password);
-
         copyButton.classList.add("success");
-
         copyButton.innerHTML = SUCCESS_SVG;
-
         showToast("Password copied");
-
         startClipboardClearTimer(password);
-
         setTimeout(() => {
             copyButton.classList.remove("success");
-
             copyButton.innerHTML = COPY_SVG;
         }, 1800);
     } catch (error) {
         console.error(error);
-
         showToast("Copy failed");
     }
 }
 
-/* ===========================================================
-   GENERATE + UI
-=========================================================== */
-
 function generate() {
     generatePassword();
-
     updateStrengthMeter();
 }
 
@@ -492,31 +348,9 @@ function generateAndCopy() {
     }, intervalTime);
 }
 
-/* ===========================================================
-   EVENTS
-=========================================================== */
-
-generateButton.addEventListener(
-    "click",
-
-    generateAndCopy,
-);
-
-copyButton.addEventListener(
-    "click",
-
-    copyPassword,
-);
-
-passwordField.addEventListener(
-    "dblclick",
-
-    copyPassword,
-);
-
-/* ===========================================================
-   LIVE UPDATES
-=========================================================== */
+generateButton.addEventListener("click", generateAndCopy);
+copyButton.addEventListener("click", copyPassword);
+passwordField.addEventListener("dblclick", copyPassword);
 
 slider.addEventListener("input", () => {
     lengthValue.textContent = slider.value;
@@ -530,41 +364,22 @@ slider.addEventListener("input", () => {
     symbolsCheckbox,
     excludeCheckbox,
 ].forEach((element) => {
-    element.addEventListener(
-        "change",
-
-        updateStrengthMeter,
-    );
+    element.addEventListener("change", updateStrengthMeter);
 });
 
-/* ===========================================================
-   KEYBOARD SHORTCUTS
-=========================================================== */
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+        generateAndCopy();
+    }
 
-document.addEventListener(
-    "keydown",
-
-    (event) => {
-        if (event.key === "Enter") {
-            generateAndCopy();
-        }
-
-        if (event.key === "Escape") {
-            passwordField.blur();
-        }
-    },
-);
-/* ===========================================================
-   INITIALIZATION
-=========================================================== */
+    if (event.key === "Escape") {
+        passwordField.blur();
+    }
+});
 
 function initialize() {
-    // Update slider value
     lengthValue.textContent = slider.value;
-
-    // Update strength meter
     updateStrengthMeter();
 }
 
-// Start VaultGen
 initialize();
