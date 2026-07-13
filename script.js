@@ -202,25 +202,12 @@ function updateStrengthMeter() {
 }
 
 function showToast(message) {
-    toast.innerHTML = message;
+    toast.textContent = message;
     toast.classList.add("show");
     setTimeout(() => {
         toast.classList.remove("show");
     }, 1800);
 }
-
-const COPY_SVG = `
-<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <rect x="9" y="9" width="13" height="13" rx="2"></rect>
-    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-</svg>
-`;
-
-const SUCCESS_SVG = `
-<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-    <polyline points="20 6 9 17 4 12"></polyline>
-</svg>
-`;
 
 function startClipboardClearTimer(passwordToClear) {
     if (clipboardClearTimeout) {
@@ -248,12 +235,10 @@ async function copyPassword() {
     try {
         await navigator.clipboard.writeText(password);
         copyButton.classList.add("success");
-        copyButton.innerHTML = SUCCESS_SVG;
         showToast("Password copied");
         startClipboardClearTimer(password);
         setTimeout(() => {
             copyButton.classList.remove("success");
-            copyButton.innerHTML = COPY_SVG;
         }, 1800);
     } catch (error) {
         console.error(error);
@@ -265,15 +250,6 @@ function generate() {
     generatePassword();
     updateStrengthMeter();
 }
-
-const GREEN_TICK_SVG = `
-<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">
-    <polyline points="20 6 9 17 4 12"></polyline>
-</svg>
-`;
-
-const GENERATE_BTN_HTML = `🔐 Generate & Copy`;
-const GENERATE_BTN_SUCCESS_HTML = `${GREEN_TICK_SVG}<span>Generated &amp; Copied</span>`;
 
 async function copyGeneratedPassword() {
     const password = currentGeneratedPassword;
@@ -287,19 +263,17 @@ async function copyGeneratedPassword() {
     try {
         await navigator.clipboard.writeText(password);
 
-        generateButton.innerHTML = GENERATE_BTN_SUCCESS_HTML;
+        generateButton.classList.add("success");
         generateButton.disabled = true;
 
         copyButton.classList.add("success");
-        copyButton.innerHTML = SUCCESS_SVG;
 
         startClipboardClearTimer(password);
 
         setTimeout(() => {
-            generateButton.innerHTML = GENERATE_BTN_HTML;
+            generateButton.classList.remove("success");
             generateButton.disabled = false;
             copyButton.classList.remove("success");
-            copyButton.innerHTML = COPY_SVG;
             isGenerating = false;
         }, 1500);
     } catch (error) {

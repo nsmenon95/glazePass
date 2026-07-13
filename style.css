@@ -901,3 +901,25 @@ label,
         rgba(34,197,94,.6);
 
 }
+
+.icon-btn .success-icon {
+    display: none;
+}
+.icon-btn.success .copy-icon {
+    display: none;
+}
+.icon-btn.success .success-icon {
+    display: block;
+}
+
+.generate-btn .btn-text-success {
+    display: none;
+}
+.generate-btn.success .btn-text-default {
+    display: none;
+}
+.generate-btn.success .btn-text-success {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
