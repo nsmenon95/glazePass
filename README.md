@@ -2,7 +2,7 @@
 
 > A premium, offline-first Chrome Extension for generating cryptographically secure passwords.
 
-**glazePass** is a local-only, secure, and beautiful password generator designed as a Google Chrome Extension. It combines high-end glassmorphism aesthetics with cryptographic reliability to ensure your credentials are safe, unique, and easy to create.
+**glazePass** is a local-only, secure, and beautiful password generator designed as a Browser Extension. It combines high-end glassmorphism aesthetics with cryptographic reliability to ensure your credentials are safe, unique, and easy to create.
 
 ---
 
