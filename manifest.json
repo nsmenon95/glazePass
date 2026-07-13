@@ -1,11 +1,11 @@
 {
   "manifest_version": 3,
-  "name": "LockForge",
+  "name": "glazePass",
   "version": "1.0.0",
   "description": "Offline cryptographically secure password generator.",
   "action": {
     "default_popup": "index.html",
-    "default_title": "LockForge",
+    "default_title": "glazePass",
     "default_icon": "icon.svg"
   },
   "icons": {

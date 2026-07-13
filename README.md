@@ -1,8 +1,8 @@
-# LockForge 🔐
+# glazePass 🔐
 
 > A premium, offline-first Chrome Extension for generating cryptographically secure passwords.
 
-**LockForge** is a local-only, secure, and beautiful password generator designed as a Google Chrome Extension. It combines high-end glassmorphism aesthetics with cryptographic reliability to ensure your credentials are safe, unique, and easy to create.
+**glazePass** is a local-only, secure, and beautiful password generator designed as a Google Chrome Extension. It combines high-end glassmorphism aesthetics with cryptographic reliability to ensure your credentials are safe, unique, and easy to create.
 
 ---
 
@@ -33,8 +33,8 @@
 1. Open Google Chrome and type `chrome://extensions/` in the address bar.
 2. In the top-right corner, toggle the **Developer mode** switch to **ON**.
 3. In the top-left corner, click the **Load unpacked** button.
-4. Select the root **LockForge** directory (containing `manifest.json`, `index.html`, etc.).
-5. Pin **LockForge** to your browser toolbar for quick one-click access!
+4. Select the root **glazePass** directory (containing `manifest.json`, `index.html`, etc.).
+5. Pin **glazePass** to your browser toolbar for quick one-click access!
 
 ---
 
@@ -47,4 +47,4 @@
 
 ## 🔒 Security Principles
 
-LockForge generates your passwords entirely client-side. The extension requests zero permissions, makes zero network requests, and never stores or logs your passwords.
+glazePass generates your passwords entirely client-side. The extension requests zero permissions, makes zero network requests, and never stores or logs your passwords.
